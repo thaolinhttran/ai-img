@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Dashboard from './components/Dashboard'
 import Preference from './components/Preferences'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
-import { Home, CreatePost, Login, Profile} from './pages'
+import { Home, CreatePost, Login, Profile, Signup} from './pages'
 import user from './assets/user.png'
 
 const App = () => {
@@ -12,8 +12,8 @@ const App = () => {
       <BrowserRouter>
         <header className="w-full flex justify-between items-center bg-white
       sm:px-8 px-4 py-4 border-b border-b-[#e6ebf4]">
-          <Link to="/">
-            Logo
+          <Link to="/" className='font-extrabold text-[30px]'>
+            CRAITE
           </Link>
           {isLogIn ? (
             <div className='flex justify-between gap-2'>
@@ -44,6 +44,7 @@ const App = () => {
           <Route path="/log-in" element={<Login />}/>
           <Route path="/create-post" element={<CreatePost />}/>
           <Route path="/profile" element={<Profile />}/>
+          <Route path="/sign-up" element={<Signup />}/>
         </Routes>
         </main>
       </BrowserRouter>
