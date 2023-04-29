@@ -7,5 +7,5 @@ export {
     FormField,
     Dashboard, 
     Preference,
-    Loader
+    Loader,
 }

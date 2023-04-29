@@ -9,11 +9,14 @@ const Login = () => {
   return (
     <section className='max-w-2xl mx-auto'>
       <div className='bg-white border border-[#e6ebf4] rounded-2xl'>
-        <h1 className='flex justify-left px-5 font-bold text-[18px] mt-5 mb-3'>
-          Welcome back to CRAITE!
+        <h1 className='flex justify-center px-5 font-bold text-[26px] mt-14'>
+          Hello! Welcome back.
         </h1>
-        <div className='px-5 lg:px-10'>
-          <div className='mb-3'>
+        <p className='flex justify-center px-5 font-normal text-sm mt-1 mb-10'>
+          Let your creativity flows.
+        </p>
+        <div className='px-24 lg:px-10'>
+          <div className='mb-5'>
             <FormField
             LabelName="Email Address"
             type="text"
@@ -21,7 +24,7 @@ const Login = () => {
             placeholder="Email Address"
             />
           </div>
-          <div className='mb-3'>
+          <div className='mb-5'>
             <FormField
             LabelName="Password"
             type="text"
@@ -32,11 +35,11 @@ const Login = () => {
           <div>
             <button 
             onClick={handleSubmit}
-            className='bg-[#39AEA9] w-full mb-3 mt-3 rounded-md py-2 font-bold text-white'>
+            className='bg-[#39AEA9] w-full my-5 rounded-md py-2 font-bold text-white'>
               LOGIN
             </button>
           </div>
-          <div className='mb-5'>
+          <div className='mb-14'>
           <Link to='/sign-up' 
           className="font-inter font-small text-[13px]
            text-blue-900 py-2 rounded-md underline">

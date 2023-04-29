@@ -9,11 +9,11 @@ const Signup = () => {
   return(
   <section className='max-w-2xl mx-auto'>
       <div className='bg-white border border-[#e6ebf4] rounded-2xl'>
-          <h1 className='flex justify-left px-5 font-bold text-[18px] mt-5 mb-3'>
+          <h1 className='flex justify-left px-5 font-bold text-[26px] mt-14 mb-5'>
           Welcome to CRAITE!
         </h1>
         <div className='px-5 lg:px-10'>
-          <div className='flex justify-around sm:gap-3 gap-5 lg:gap-10 mb-3'>
+          <div className='flex justify-around sm:gap-3 gap-5 lg:gap-10 mb-5'>
             <div className='w-full'>
             <FormField
             LabelName="First Name"
@@ -31,7 +31,23 @@ const Signup = () => {
             />
             </div>
           </div>
-          <div className='mb-3'>
+          <div className='mb-5'>
+            <FormField
+            LabelName="Location"
+            type="text"
+            name="text"
+            placeholder="Location"
+            />
+          </div>
+          <div className='mb-5'>
+            <FormField
+            LabelName="Art Styles"
+            type="text"
+            name="text"
+            placeholder="Your favorite art styles"
+            />
+          </div>
+          <div className='mb-5'>
             <FormField
             LabelName="Email Address"
             type="text"
@@ -39,7 +55,7 @@ const Signup = () => {
             placeholder="Email Address"
             />
           </div>
-          <div className='mb-3'>
+          <div className='mb-5'>
             <FormField
             LabelName="Password"
             type="text"
@@ -54,7 +70,7 @@ const Signup = () => {
               REGISTER
             </button>
           </div>
-          <div className='mb-5'>
+          <div className='mb-14'>
           <Link to='/log-in' 
           className="font-inter font-small text-[13px]
            text-blue-900 py-2 rounded-md underline">
