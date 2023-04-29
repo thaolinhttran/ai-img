@@ -40,7 +40,7 @@ const Login = () => {
           <Link to='/sign-up' 
           className="font-inter font-small text-[13px]
            text-blue-900 py-2 rounded-md underline">
-            Don't have an account? Sign Up here.
+            No account? Sign Up here.
           </Link>
           </div>
         </div>
