@@ -1,13 +1,24 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { FormField } from '../components'
-import { Link } from 'react-router-dom'
-const handleSubmit = () => {
 
-}
+const LogIn = ({setSignUp}) => {
+    const [form, setForm] = useState({
+        email: "",
+        password: ""
+    }
+    )
 
-const Login = () => {
-  return (
-    <section className='max-w-2xl mx-auto'>
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(form);
+    }
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value})
+    }
+
+    return (
+        <section className='max-w-2xl mx-auto'>
       <div className='bg-white border border-[#e6ebf4] rounded-2xl'>
         <h1 className='flex justify-center px-5 font-bold text-[26px] mt-14'>
           Hello! Welcome back.
@@ -20,16 +31,20 @@ const Login = () => {
             <FormField
             LabelName="Email Address"
             type="text"
-            name="text"
+            name="email"
+            value={form.email}
             placeholder="Email Address"
+            handleChange={handleChange}
             />
           </div>
           <div className='mb-5'>
             <FormField
             LabelName="Password"
             type="text"
-            name="text"
+            name="password"
+            value={form.password}
             placeholder="Password"
+            handleChange={handleChange}
             />
           </div>
           <div>
@@ -40,16 +55,17 @@ const Login = () => {
             </button>
           </div>
           <div className='mb-14'>
-          <Link to='/sign-up' 
+          <button
+          onClick={() => setSignUp(true)}
           className="font-inter font-small text-[13px]
            text-blue-900 py-2 rounded-md underline">
             No account? Sign Up here.
-          </Link>
+          </button>
           </div>
         </div>
       </div>
     </section>
-  )
+    )
 }
 
-export default Login
+export default LogIn

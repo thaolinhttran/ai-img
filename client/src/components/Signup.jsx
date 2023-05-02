@@ -1,13 +1,45 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { FormField } from '../components'
-import { Link } from 'react-router-dom'
-const handleSubmit = () => {
 
-}
+const Signup = ({setSignUp}) => {
+    const [form, setForm] = useState({
+        firstname: "",
+        lastname: "",
+        location: "",
+        artstyle: "",
+        email: "",
+        password: "",
+        posts:[],
+        likedposts:[],
+    }
+    )
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(form);
 
-const Signup = () => {
-  return(
-  <section className='max-w-2xl mx-auto'>
+        try{
+            const response = await fetch('http://localhost:8080/register',{
+                method: "POST",
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify(form)
+            })
+
+            const data = await response.json();
+            console.log(data, "userRegister");
+        }
+        catch(err){
+            alert(err);
+        }
+    }
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value})
+    }
+
+    return (
+    <section className='max-w-2xl mx-auto'>
       <div className='bg-white border border-[#e6ebf4] rounded-2xl'>
           <h1 className='flex justify-left px-5 font-bold text-[26px] mt-14 mb-5'>
           Welcome to CRAITE!
@@ -18,16 +50,20 @@ const Signup = () => {
             <FormField
             LabelName="First Name"
             type="text"
-            name="text"
+            name="firstname"
             placeholder="First Name"
+            value={form.firstname}
+            handleChange={handleChange}
             />
             </div>
             <div className='w-full'>
             <FormField
-            LabelName="First Name"
+            LabelName="Last Name"
             type="text"
-            name="text"
-            placeholder="First Name"
+            name="lastname"
+            placeholder="Last Name"
+            value={form.lastname}
+            handleChange={handleChange}
             />
             </div>
           </div>
@@ -35,32 +71,40 @@ const Signup = () => {
             <FormField
             LabelName="Location"
             type="text"
-            name="text"
+            name="location"
             placeholder="Location"
+            value={form.location}
+            handleChange={handleChange}
             />
           </div>
           <div className='mb-5'>
             <FormField
             LabelName="Art Styles"
             type="text"
-            name="text"
+            name="artstyle"
             placeholder="Your favorite art styles"
+            value={form.artstyle}
+            handleChange={handleChange}
             />
           </div>
           <div className='mb-5'>
             <FormField
             LabelName="Email Address"
             type="text"
-            name="text"
+            name="email"
             placeholder="Email Address"
+            value={form.email}
+            handleChange={handleChange}
             />
           </div>
           <div className='mb-5'>
             <FormField
             LabelName="Password"
             type="text"
-            name="text"
+            name="password"
             placeholder="Password"
+            value={form.password}
+            handleChange={handleChange}
             />
           </div>
           <div>
@@ -71,16 +115,17 @@ const Signup = () => {
             </button>
           </div>
           <div className='mb-14'>
-          <Link to='/log-in' 
+          <button
+          onClick={() => setSignUp(false)}
           className="font-inter font-small text-[13px]
            text-blue-900 py-2 rounded-md underline">
             Already have an account? Log In here.
-          </Link>
+          </button>
           </div>
         </div>
       </div>
     </section>
-  )
+    );
 }
 
 export default Signup

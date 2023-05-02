@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Dashboard from './components/Dashboard'
 import Preference from './components/Preferences'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
-import { Home, CreatePost, Login, Profile, Signup} from './pages'
+import { Home, CreatePost, Profile, Auth} from './pages'
 import user from './assets/user.png'
 
 const App = () => {
@@ -30,7 +30,7 @@ const App = () => {
             </Link>
             </div>
             ) : (
-              <Link to="/log-in"
+              <Link to="/auth"
               className="font-inter font-medium bg-[#39AEA9]
               text-white px-4 py-2 rounded-md">
                 Log In
@@ -41,10 +41,9 @@ const App = () => {
       min-h-[calc(100vh-73px)]'>
         <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path="/log-in" element={<Login />}/>
+          <Route path="/auth" element={<Auth />}/>
           <Route path="/create-post" element={<CreatePost />}/>
           <Route path="/profile" element={<Profile />}/>
-          <Route path="/sign-up" element={<Signup />}/>
         </Routes>
         </main>
       </BrowserRouter>
