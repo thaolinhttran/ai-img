@@ -1,49 +1,44 @@
-import React, { useState } from 'react'
-import Dashboard from './components/Dashboard'
-import Preference from './components/Preferences'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import { Home, CreatePost, Profile, Auth} from './pages'
-import user from './assets/user.png'
+import {Nav} from './components'
 
 const App = () => {
   const [isLogIn, setIsLogIn] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const fetchUser = async () => {
+    const response = await fetch('http://localhost:8080/user-data', {
+      method: "POST",
+      headers: {
+        'Content-Type' : 'application/json',
+      },
+      body: JSON.stringify({token:window.localStorage.getItem("token")})
+    })
+    const data = await response.json();
+    console.log(data, "userData");
+    if(data.status === "ok"){
+      setIsLogIn(true);
+      setUserData(data.data);
+    }
+  }
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
     <div className="wrapper">
       <BrowserRouter>
-        <header className="w-full flex justify-between items-center bg-white
-      sm:px-8 px-4 py-4 border-b border-b-[#e6ebf4]">
-          <Link to="/" className='font-extrabold text-[30px]'>
-            CRAITE
-          </Link>
-          {isLogIn ? (
-            <div className='flex justify-between gap-2'>
-              <Link to="/create-post"
-            className="font-inter font-medium bg-[#39AEA9]
-           text-white px-4 py-2 rounded-md">
-              Create Post
-            </Link>
-            <Link to="/profile"
-            className=" flex items-center font-inter gap-2 font-medium bg-[#39AEA9]
-           text-white px-4 py-2 rounded-md">
-              Profile
-              <img src={user} alt="user profile" className= "w-6 h-6 object-contain invert"/>
-            </Link>
-            </div>
-            ) : (
-              <Link to="/auth"
-              className="font-inter font-medium bg-[#39AEA9]
-              text-white px-4 py-2 rounded-md">
-                Log In
-              </Link>
-          )}
-        </header>
+        <div>
+          <Nav isLogIn={isLogIn} userData={userData}/>
+        </div>
         <main className='sm:p-8 px-4 py-8 w-full bg-[#f9f8fe] 
       min-h-[calc(100vh-73px)]'>
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/auth" element={<Auth />}/>
           <Route path="/create-post" element={<CreatePost />}/>
-          <Route path="/profile" element={<Profile />}/>
+          <Route path="/profile" element={<Profile userData={userData}/>}/>
         </Routes>
         </main>
       </BrowserRouter>

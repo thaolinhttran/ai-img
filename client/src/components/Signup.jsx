@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { FormField } from '../components'
+import { useNavigate } from 'react-router-dom';
 
 const Signup = ({setSignUp}) => {
     const [form, setForm] = useState({
@@ -28,6 +29,10 @@ const Signup = ({setSignUp}) => {
 
             const data = await response.json();
             console.log(data, "userRegister");
+            if(data.success){
+              setSignUp(false);
+            }
+
         }
         catch(err){
             alert(err);
@@ -100,7 +105,7 @@ const Signup = ({setSignUp}) => {
           <div className='mb-5'>
             <FormField
             LabelName="Password"
-            type="text"
+            type="password"
             name="password"
             placeholder="Password"
             value={form.password}

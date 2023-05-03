@@ -1,16 +1,37 @@
 import React, {useState} from 'react'
 import { FormField } from '../components'
 
-const LogIn = ({setSignUp}) => {
+const LogIn = ({setSignUp, setIsLogIn}) => {
     const [form, setForm] = useState({
         email: "",
         password: ""
     }
     )
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(form);
+
+        try{
+          const response = await fetch('http://localhost:8080/login-user', {
+            method: "POST",
+            headers: {
+              'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify(form)
+          })
+
+          const data = await response.json();
+          console.log(data, "userConfirmed");
+          if(data.status =="ok"){
+            alert("Login successful");
+            window.localStorage.setItem("token", data.data);
+            window.location.href="../"
+          }
+        }
+        catch(err){
+          alert(err);
+        }
     }
 
     const handleChange = (e) => {
@@ -40,7 +61,7 @@ const LogIn = ({setSignUp}) => {
           <div className='mb-5'>
             <FormField
             LabelName="Password"
-            type="text"
+            type="password"
             name="password"
             value={form.password}
             placeholder="Password"
