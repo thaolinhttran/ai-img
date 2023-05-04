@@ -1,12 +1,15 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faUser, faHeart } from '@fortawesome/free-solid-svg-icons';
 import userimg from '../assets/user.png'
+import { RenderCards } from '../components';
 
-const Profile = ({userData}) => {
+const Profile = ({userData, allPosts}) => {
+  const myPosts = allPosts.filter(post => post.userid === userData._id);
+
   return (
     <section className='max-w-7xl mx-auto'>
-      <div>
+      <div className='mb-10'>
         <h1 className='font-extrabold text-[#222328] text-[32px]'>
           Profile
         </h1>
@@ -29,6 +32,18 @@ const Profile = ({userData}) => {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <h1 className='font-extrabold text-[#222328] text-[32px] mb-5'>
+          My Posts
+        </h1>
+        <div className="grid lg:grid-cols-4 sm:grid-cols-3
+            xs:grid-cols-2 grid-cols-1 gap-3">
+                <RenderCards
+                  data={myPosts}
+                  title="No posts found"
+                />
+            </div>
       </div>
     </section>
   )

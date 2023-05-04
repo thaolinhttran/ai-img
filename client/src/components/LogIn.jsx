@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { FormField } from '../components'
 
-const LogIn = ({setSignUp, setIsLogIn}) => {
+const LogIn = ({setSignUp}) => {
     const [form, setForm] = useState({
         email: "",
         password: ""
