@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import user from '../assets/user.png'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Nav = ({isLogIn, userData}) => {
   const [showLogout, setShowLogout] = useState(false);
-
+  const navigate = useNavigate();
   const handleMouseEnter = () => {
     setShowLogout(true);
   };
@@ -46,6 +47,7 @@ const Nav = ({isLogIn, userData}) => {
                 onClick={() => {
                   window.localStorage.removeItem("token");
                   window.location.reload();
+                  navigate('/');
                 }}
                 className="absolute right-0 font-inter font-medium bg-[#a3cac8] text-white
                  px-4 py-2 rounded-md shadow-md z-10"

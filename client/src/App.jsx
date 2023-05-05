@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
-import { Home, CreatePost, Profile, Auth} from './pages'
+import { Home, CreatePost, Profile, Auth, PostPage} from './pages'
 import {Nav} from './components'
 
 const App = () => {
@@ -43,6 +43,7 @@ const App = () => {
         if(response.ok){
           const result = await response.json();
           setAllPosts(result.data.reverse());
+          console.log(allPosts);
         }
        } catch (error){
         alert(error);
@@ -66,6 +67,7 @@ const App = () => {
           <Route path="/auth" element={<Auth />}/>
           <Route path="/create-post" element={<CreatePost userData={userData}/>}/>
           <Route path="/profile" element={<Profile userData={userData} allPosts={allPosts}/>}/>
+          <Route path="/posts/:id" element={<PostPage userData={userData} />}/>
         </Routes>
         </main>
       </BrowserRouter>

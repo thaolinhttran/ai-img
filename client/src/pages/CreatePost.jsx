@@ -20,8 +20,6 @@ const CreatePost = ({userData}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted");
-    console.log(form.username);
     if(form.prompt && form.photo){
       setLoading(true);
 

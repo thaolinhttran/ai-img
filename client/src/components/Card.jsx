@@ -1,8 +1,13 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import downloadimg from '../assets/download.png'
+import commentimg from '../assets/comment.png'
 import { downloadImage } from '../utils';
+import { useNavigate } from 'react-router-dom';
 const Card = ({_id, username, prompt, photo}) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/posts/${_id}`);
+  }
   return (
     <div className='rounded-xl group relative shadow-card
     hover:shadow-cardhover card'>
@@ -24,11 +29,19 @@ const Card = ({_id, username, prompt, photo}) => {
             </div>
             <p className='text-white text-sm'>{username}</p>
           </div>
-          <button type="button" onClick={() => downloadImage(_id, photo)}
+          <div className='flex gap-2'>
+          <button type="button" onClick={handleClick}
             className='outline-none bg-transparent border-none'>
-              <img src={faDownload} alt="download" className='w-6 h-6
+              <img src={commentimg} alt="download" className='w-6 h-6
               object-contain invert'/>
-          </button>
+            </button>
+            <button type="button" onClick={() => downloadImage(_id, photo)}
+            className='outline-none bg-transparent border-none'>
+              <img src={downloadimg} alt="download" className='w-6 h-6
+              object-contain invert'/>
+            </button>
+          </div>
+          
         </div>
       </div>
     </div>

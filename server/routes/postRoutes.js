@@ -25,6 +25,19 @@ router.route('/').get(async(req, res) => {
     }
 })
 
+//Get post by id
+router.route('/:id').get(async(req, res) => {
+    const postId = req.params.id;
+    const post = await Post.findById(postId).populate('userid');
+
+    if (!post) {
+        return res.status(404).send({ message: 'Post not found' });
+    }
+
+    res.send(post);
+    
+})
+
 //Create post
 router.route('/').post(async(req, res) => {
     try {

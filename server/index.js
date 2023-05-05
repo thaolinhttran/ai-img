@@ -7,6 +7,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import postRoutes from './routes/postRoutes.js'
 import dalleRoutes from './routes/dalleRoutes.js'
+import commentRoutes from './routes/commentRoutes.js'
 
 dotenv.config();
 
@@ -17,6 +18,8 @@ app.use(express.json({limit: '50mb'}));
 
 app.use('/api/v1/post', postRoutes);
 app.use('/api/v1/dalle', dalleRoutes);
+
+app.use('/api/v1/comment', commentRoutes);
 
 app.get('/', async (req, res) => {
     res.send('Hello from Dalle');

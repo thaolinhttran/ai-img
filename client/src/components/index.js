@@ -5,6 +5,7 @@ import LogIn from "./LogIn"
 import Nav from "./Nav";
 import Card from './Card'
 import RenderCards from "./RenderCards";
+import Comment from "./Comment";
 export {
     FormField,
     Loader,
@@ -12,5 +13,7 @@ export {
     LogIn,
     Nav,
     Card,
-    RenderCards
+    RenderCards,
+    Comment,
+    
 }
