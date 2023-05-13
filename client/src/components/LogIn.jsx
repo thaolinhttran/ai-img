@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { FormField } from '../components'
+import { UserContext } from '../components/UserContext'
 
 const LogIn = ({setSignUp}) => {
+  const { setIsLoggedIn } = useContext(UserContext);
     const [form, setForm] = useState({
         email: "",
         password: ""
@@ -25,6 +27,7 @@ const LogIn = ({setSignUp}) => {
           console.log(data, "userConfirmed");
           if(data.status =="ok"){
             alert("Login successful");
+            setIsLoggedIn(true);
             window.localStorage.setItem("token", data.data);
             window.location.href="../"
           }
@@ -71,7 +74,7 @@ const LogIn = ({setSignUp}) => {
           <div>
             <button 
             onClick={handleSubmit}
-            className='bg-[#39AEA9] w-full my-5 rounded-md py-2 font-bold text-white'>
+            className='bg-[#616161] hover:bg-[#8a8989] w-full my-5 rounded-md py-2 font-bold text-white'>
               LOGIN
             </button>
           </div>
@@ -79,7 +82,7 @@ const LogIn = ({setSignUp}) => {
           <button
           onClick={() => setSignUp(true)}
           className="font-inter font-small text-[13px]
-           text-blue-900 py-2 rounded-md underline">
+           text-blue-900 py-2 rounded-md underline hover:text-slate-500">
             No account? Sign Up here.
           </button>
           </div>

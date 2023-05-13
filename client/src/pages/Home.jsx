@@ -6,18 +6,36 @@ const Home = ({loading, allPosts}) => {
   const [searchText, setSearchText] = useState('');
   const [searchResults, setSearchResults] = useState(null);
   const [searchTimeout, setSearchTimeout] = useState(null);
+  
+  const searchPosts = () => {
+    const searchResults = allPosts.filter(
+      (item) =>
+        item.username.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.prompt.toLowerCase().includes(searchText.toLowerCase())
+    );
 
-  const handleSearchChange = () =>{
+    setSearchResults(searchResults);
+  };
 
+  useEffect(() => {
+    searchPosts();
+  }, [searchText, allPosts]);
+
+  const handleSearchChange = (e) =>{
+     clearTimeout(searchTimeout);
+
+    setSearchText(e.target.value);
+
+    setSearchTimeout(setTimeout(searchPosts, 500));
   }
   
   return (
     <section className='max-w-7xl mx-auto'>
       <div>
-        <h1 className='font-extrabold text-[#222328] text-[32px]'>
+        <h1 className='font-extrabold text-white text-[32px]'>
           Welcome to CRAITE
         </h1>
-        <p className='mt-2 text-[#666e75] text-[16px] max-w-[500px]'>
+        <p className='mt-2 text-white text-[16px] max-w-[500px]'>
           Enjoy a collection of imaginative and visually stunning images generated
           by DALL-E AI
         </p>
@@ -42,9 +60,9 @@ const Home = ({loading, allPosts}) => {
         ) : (
           <>
           {searchText && (
-              <h2 className="font-medium text-[#666e75] text-xl
+              <h2 className="font-medium text-[#b5b5b5] text-xl
               mb-3">
-                Showing results for <span className='text-[#222328]'>
+                Showing results for <span className='text-white underline'>
                   {searchText}
                 </span>
               </h2>

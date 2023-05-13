@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { Card, Comment, Loader } from '../components'
 import { useParams } from 'react-router-dom'
-
-const PostPage = ({userData}) => {
+import { UserContext } from '../components/UserContext'
+const PostPage = () => {
+    const { userData } = useContext(UserContext);
     const {id} = useParams();
     const [post, setPost] = useState(null);
     useEffect(() => {
@@ -16,7 +17,7 @@ const PostPage = ({userData}) => {
   return (
     <div >
         {post? (
-            <div className="grid grid-cols-2 h-full">
+            <div className="grid grid-cols-2 gap-5 h-full">
             <div className="max-w-screen-md">
                 <Card key={post._id} {...post} />
             </div>

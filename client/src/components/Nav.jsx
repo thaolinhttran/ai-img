@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import user from '../assets/user.png'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../components/UserContext'
 
-const Nav = ({isLogIn, userData}) => {
+const Nav = () => {
+  const { userData, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
   const [showLogout, setShowLogout] = useState(false);
   const navigate = useNavigate();
   const handleMouseEnter = () => {
@@ -14,42 +16,46 @@ const Nav = ({isLogIn, userData}) => {
     setShowLogout(false);
   };
   return (
-    <header className="w-full flex justify-between items-center bg-white
+    <header className="w-full flex justify-between items-center bg-[#292929]
       sm:px-8 px-4 py-4 border-b border-b-[#e6ebf4]">
-          <Link to="/" className='font-extrabold text-[30px]'>
+          <Link to="/" className='font-extrabold text-[30px] text-white'>
             CRAITE
           </Link>
-          {isLogIn ? (
+          {isLoggedIn ? (
             <div className='flex justify-between gap-2'>
               <Link to="/create-post"
-            className="font-inter font-medium bg-[#39AEA9]
-           text-white px-4 py-2 rounded-md">
-              Create Post
+            className="font-inter font-medium
+           text-white px-4 py-2 rounded-md bg-[#616161] hover:bg-[#8a8989]">
+              Create
             </Link>
             <div
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             className="relative"
           >
-            <Link
-              to="/profile"
-              className="flex items-center font-inter gap-2 font-medium bg-[#39AEA9] text-white px-4 py-2 rounded-md"
-            >
-              {userData && `${userData.firstname} ${userData.lastname}`}
-              <img
-                src={user}
-                alt="user profile"
-                className="w-6 h-6 object-contain invert"
-              />
-            </Link>
+            {userData && (
+              <Link
+                to="/profile"
+                className="flex items-center font-inter gap-2 bg-[#616161] 
+                font-medium text-white px-4 py-2 rounded-md hover:bg-[#8a8989]"
+              >
+                <span>{`${userData.firstname} ${userData.lastname}`}</span>
+                <img
+                  src={user}
+                  alt="user profile"
+                  className="w-6 h-6 object-contain invert"
+                />
+              </Link>
+            )}
             {showLogout && (
               <button
                 onClick={() => {
                   window.localStorage.removeItem("token");
                   window.location.reload();
                   navigate('/');
+                  setIsLoggedIn(false);
                 }}
-                className="absolute right-0 font-inter font-medium bg-[#a3cac8] text-white
+                className="absolute right-0 font-inter font-medium bg-[#616161] hover:bg-[#8a8989] text-white
                  px-4 py-2 rounded-md shadow-md z-10"
               >
                 Log out
@@ -59,7 +65,7 @@ const Nav = ({isLogIn, userData}) => {
             </div>
             ) : (
               <Link to="/auth"
-              className="font-inter font-medium bg-[#39AEA9]
+              className="font-inter font-medium bg-[#616161] hover:bg-[#8a8989]
               text-white px-4 py-2 rounded-md">
                 Log In
               </Link>

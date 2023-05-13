@@ -5,15 +5,15 @@ const FormField = ({LabelName, type, name, placeholder, value, handleChange, isS
     <div>
         <div className='flex items-center gap-2 mb-1 px-2'>
             <label htmlFor={name} 
-            className='block text-sm font-medium text-gray-700'>
+            className='block text-sm font-medium text-white'>
                     {LabelName}
             </label>
             {isSurpriseMe && (
                 <button
                     type="button"
                     onClick={handleSurpriseMe}
-                    className='font-semibold text-xs bg-[#ECECF1] py-1 px-2
-                    rounded-[5px] text-black'
+                    className='font-semibold text-xs bg-[#616161] py-1 px-2
+                    rounded-[5px] text-white hover:bg-[#8a8989]'
                 >
                     Surprise Me
                 </button>

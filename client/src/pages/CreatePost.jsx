@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { FormField } from '../components'
 import preview from '../assets/preview.png'
 import {Loader} from '../components'
 import { useNavigate } from 'react-router-dom'
 import {getRandomPrompt} from '../utils'
+import { UserContext } from '../components/UserContext'
 
-const CreatePost = ({userData}) => {
+const CreatePost = ({allPosts, setAllPosts}) => {
+  const { userData } = useContext(UserContext);
   const navigate = useNavigate();
-  const [isSurpriseMe, setIsSurpriseMe] = useState(false);
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
@@ -34,6 +35,18 @@ const CreatePost = ({userData}) => {
 
         await response.json();
         navigate('/');
+        const postsResponse = await fetch('http://localhost:8080/api/v1/post', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (postsResponse.ok) {
+          const result = await postsResponse.json();
+          setAllPosts(result.data.reverse());
+          console.log(allPosts);
+        }
       } catch(error){
         alert(error)
       } finally {
@@ -79,10 +92,10 @@ const CreatePost = ({userData}) => {
   return (
     <section className='max-w-7xl mx-auto'>
       <div>
-        <h1 className='font-extrabold text-[#222328] text-[32px]'>
+        <h1 className='font-extrabold text-white text-[32px]'>
           Let The Magic Begins
         </h1>
-        <p className='mt-3 text-[666e75] text-16px max-w-[500px]'>
+        <p className='mt-3 text-white text-16px max-w-[500px]'>
           Create imaginative and visually stunning images generated through
           DALL-E AI and share them with the community
         </p>
@@ -131,7 +144,7 @@ const CreatePost = ({userData}) => {
         <button
                 type="button"
                 onClick={generateImage}
-                className='text-white bg-green-700 font-medium
+                className='text-white bg-[#616161] hover:bg-[#8a8989] font-medium
                 rounded-md text-sm w-full sm:w-auto px-5 py-2.5
                 text-center'
               >
@@ -139,14 +152,14 @@ const CreatePost = ({userData}) => {
         </button>
         </div>
         <div className='mt-10'>
-              <p className='mt-2 text-[#666e75] text-[14px]'>Once you have created the image you want, you can share 
+              <p className='mt-2 text-white text-[14px]'>Once you have created the image you want, you can share 
                 it with others in the community
               </p>
               <button
                 type="submit"
-                className='mt-3 text-white bg-[#6469ff] font-medium
+                className='mt-3 text-white bg-[#616161] hover:bg-[#8a8989] font-medium
                 rounded-md text-sm w-full sm:w-auto
-                px-5 py2.5 text-center'
+                px-5 py-2.5 text-center'
               >
                 {loading ? 'Sharing...' : 'Share with the community'}
               </button>

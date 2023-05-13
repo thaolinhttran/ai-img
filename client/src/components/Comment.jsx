@@ -44,24 +44,24 @@ const Comment = ({post, userData}) => {
           }
       };
     return (
-        <div className="rounded-lg bg-white px-10 py-10">
+        <div className="rounded-lg bg-[#616161] px-10 py-10">
         <div className='pb-10'>
-          <h3 className="text-lg font-semibold mt-2 mb-4">Comments:</h3>
+          <h3 className="text-lg font-semibold text-white mt-2 mb-4">Comments:</h3>
           <div>
             {postComments && postComments.map((com) => (
-                <div key={com._id} className='border border-slate-800 rounded-lg my-3 px-5 py-2'>
+                <div key={com._id} className='border border-slate-800 bg-[#d9d8d8] text-[#616161] rounded-lg my-3 px-5 py-2'>
                     <div key={com._id} className='flex items-center gap-2 mb-2'>
                         <img src={user}
                         alt="user profile"
                         className="w-8 h-8 object-contain rounded-full "/>
                         <p className='font-bold'>{com.firstName}</p>
                     </div>
-                    <p className='px-4'>{com.text}</p>
+                    <p className='px-4 font-medium'>{com.text}</p>
                 </div>
             ))
             }
           </div>
-            <div className='rounded-lg mx-5 my-4 px-5 py-4 border border-gray-800'>
+            <div className='rounded-lg mx-5 my-4 px-5 py-4 border bg-white border-gray-800'>
               <form 
                 onSubmit={handleSubmit}>
                 <input
@@ -73,7 +73,7 @@ const Comment = ({post, userData}) => {
                   onChange={(e) => setComment({...comment, [e.target.name]: e.target.value}) }
                 />
                     <button
-                className='float-right bg-[#39AEA9] mx-5 px-5 py-2 my-8 rounded-lg'
+                className='float-right bg-[#3b3b3b] hover:bg-[#8a8989] mx-5 px-5 py-2 my-8 rounded-lg text-white'
                 type="submit">Submit</button>
               </form>
             </div>

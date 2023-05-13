@@ -1,12 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {Signup, LogIn} from '../components'
-
 const Auth = () => {
-    const [signup, setSignup] = useState(false);
+  const [signUp, setSignUp] = useState(false);
   return (
     <div>
         {
-            signup ? (<Signup setSignUp={setSignup}/>) : (<LogIn setSignUp={setSignup}/>)
+            signUp ? (<Signup setSignUp={setSignUp} />) : (<LogIn setSignUp={setSignUp} />)
         }
     </div>
   )

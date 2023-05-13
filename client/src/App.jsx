@@ -2,31 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import { Home, CreatePost, Profile, Auth, PostPage} from './pages'
 import {Nav} from './components'
-
+import UserProvider from './components/UserContext'
 const App = () => {
-  const [isLogIn, setIsLogIn] = useState(false);
-  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [allPosts, setAllPosts] = useState(null);
-  const fetchUser = async () => {
-    const response = await fetch('http://localhost:8080/user-data', {
-      method: "POST",
-      headers: {
-        'Content-Type' : 'application/json',
-      },
-      body: JSON.stringify({token:window.localStorage.getItem("token")})
-    })
-    const data = await response.json();
-    console.log(data, "userData");
-    if(data.status === "ok"){
-      setIsLogIn(true);
-      setUserData(data.data);
-    }
-  }
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
+  const [allPosts, setAllPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () =>{
@@ -57,19 +36,21 @@ const App = () => {
   return (
     <div className="wrapper">
       <BrowserRouter>
+      <UserProvider>
         <div>
-          <Nav isLogIn={isLogIn} userData={userData}/>
+          <Nav/>
         </div>
-        <main className='sm:p-8 px-4 py-8 w-full bg-[#f9f8fe] 
+        <main className='sm:p-8 px-4 py-8 w-full bg-[#292929]
       min-h-[calc(100vh-73px)]'>
         <Routes>
           <Route path="/" element={<Home loading={loading} allPosts={allPosts}/>}/>
           <Route path="/auth" element={<Auth />}/>
-          <Route path="/create-post" element={<CreatePost userData={userData}/>}/>
-          <Route path="/profile" element={<Profile userData={userData} allPosts={allPosts}/>}/>
-          <Route path="/posts/:id" element={<PostPage userData={userData} />}/>
+          <Route path="/create-post" element={<CreatePost allPosts={allPosts} setAllPosts={setAllPosts} />}/>
+          <Route path="/profile" element={<Profile allPosts={allPosts}/>}/>
+          <Route path="/posts/:id" element={<PostPage />}/>
         </Routes>
         </main>
+        </UserProvider>
       </BrowserRouter>
     </div>
   );
