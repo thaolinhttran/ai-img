@@ -3,7 +3,7 @@ import { FormField } from '../components'
 import preview from '../assets/preview.png'
 import {Loader} from '../components'
 import { useNavigate } from 'react-router-dom'
-
+import {getRandomPrompt} from '../utils'
 
 const CreatePost = ({userData}) => {
   const navigate = useNavigate();
@@ -45,7 +45,8 @@ const CreatePost = ({userData}) => {
   }
 
   const handleSurpriseMe = () => {
-
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({...form, prompt: randomPrompt})
   }
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value})
@@ -88,7 +89,7 @@ const CreatePost = ({userData}) => {
       </div>
 
       <form className='mt-16 max-w-3xl' onSubmit={handleSubmit}>
-        <div className='flex flex-col font-medium'>
+        <div className='flex flex-col gap-5 font-medium'>
         <FormField 
             LabelName="Prompt"
             type="text"
