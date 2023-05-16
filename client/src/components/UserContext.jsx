@@ -16,7 +16,6 @@ const UserProvider = ({children}) => {
             body: JSON.stringify({ token: window.localStorage.getItem('token') }),
           });
           const data = await response.json();
-          console.log(data, 'userData');
           if (data.status === 'ok') {
             setIsLoggedIn(true);
             setUserData(data.data);
