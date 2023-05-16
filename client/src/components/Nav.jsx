@@ -40,11 +40,10 @@ const Nav = () => {
                 font-medium text-white px-4 py-2 rounded-md hover:bg-[#8a8989]"
               >
                 <span>{`${userData.firstname} ${userData.lastname}`}</span>
-                <img
-                  src={user}
-                  alt="user profile"
-                  className="w-6 h-6 object-contain invert"
-                />
+                <div className='w-6 h-6 rounded-full object-cover bg-slate-700
+                flex justify-center items-center text-white text-xs font-bold'>
+                {userData.firstname[0]}
+                </div>
               </Link>
             )}
             {showLogout && (
