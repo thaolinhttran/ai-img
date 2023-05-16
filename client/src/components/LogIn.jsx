@@ -12,10 +12,9 @@ const LogIn = ({setSignUp}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(form);
 
         try{
-          const response = await fetch('http://localhost:8080/login-user', {
+          const response = await fetch('https://craite.onrender.com/login-user', {
             method: "POST",
             headers: {
               'Content-Type' : 'application/json',
@@ -24,7 +23,6 @@ const LogIn = ({setSignUp}) => {
           })
 
           const data = await response.json();
-          console.log(data, "userConfirmed");
           if(data.status =="ok"){
             alert("Login successful");
             setIsLoggedIn(true);

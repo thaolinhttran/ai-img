@@ -25,7 +25,7 @@ const CreatePost = ({allPosts, setAllPosts}) => {
       setLoading(true);
 
       try{
-        const response = await fetch('http://localhost:8080/api/v1/post', {
+        const response = await fetch('https://craite.onrender.com/api/v1/post', {
           method: 'POST',
           headers: {
             'Content-Type' : 'application/json',
@@ -35,7 +35,7 @@ const CreatePost = ({allPosts, setAllPosts}) => {
 
         await response.json();
         navigate('/');
-        const postsResponse = await fetch('http://localhost:8080/api/v1/post', {
+        const postsResponse = await fetch('https://craite.onrender.com/api/v1/post', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const CreatePost = ({allPosts, setAllPosts}) => {
     if(form.prompt){
       try{
         setGeneratingImg(true);
-        const response = await fetch('http://localhost:8080/api/v1/dalle', {
+        const response = await fetch('https://craite.onrender.com/api/v1/dalle', {
           method: 'POST',
           headers: {
             'Content-Type' : 'application/json',

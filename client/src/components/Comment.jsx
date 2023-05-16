@@ -12,7 +12,7 @@ const Comment = ({post, userData}) => {
 
     useEffect(() => {
         const fetchComments = async () => {
-          const commentResponse = await fetch(`http://localhost:8080/api/v1/comment/${post._id}`);
+          const commentResponse = await fetch(`https://craite.onrender.com/api/v1/comment/${post._id}`);
           const comment_fetched = await commentResponse.json();
           setPostComments(comment_fetched.data);
         };
@@ -25,7 +25,7 @@ const Comment = ({post, userData}) => {
         if(comment.text){
             console.log(comment)
             try{
-                const response = await fetch('http://localhost:8080/api/v1/comment', {
+                const response = await fetch('https://craite.onrender.com/api/v1/comment', {
                   method: 'POST',
                   headers: {
                     'Content-Type' : 'application/json',

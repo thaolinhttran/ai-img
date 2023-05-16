@@ -8,7 +8,7 @@ const PostPage = () => {
     const [post, setPost] = useState(null);
     useEffect(() => {
         const fetchPost = async () => {
-          const postResponse = await fetch(`http://localhost:8080/api/v1/post/${id}`);
+          const postResponse = await fetch(`https://craite.onrender.com/api/v1/post/${id}`);
           const post = await postResponse.json();
           setPost(post);
         };

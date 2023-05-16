@@ -9,7 +9,6 @@ const router = express.Router();
 router.route('/').post(async(req, res) => {
     try{
         const {postId, userId, firstName, text} = req.body;
-        console.log(req.body)
         const newComment = await Comment.create({
             postId,
             userId,

@@ -8,7 +8,7 @@ const UserProvider = ({children}) => {
 
     useEffect(() => {
         const fetchUser = async () => {
-          const response = await fetch('http://localhost:8080/user-data', {
+          const response = await fetch('https://craite.onrender.com/user-data', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

@@ -16,10 +16,9 @@ const Signup = ({setSignUp}) => {
     )
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(form);
 
         try{
-            const response = await fetch('http://localhost:8080/register',{
+            const response = await fetch('https://craite.onrender.com/register',{
                 method: "POST",
                 headers: {
                     'Content-Type' : 'application/json',
@@ -28,7 +27,6 @@ const Signup = ({setSignUp}) => {
             })
 
             const data = await response.json();
-            console.log(data, "userRegister");
             if(data.success){
               setSignUp(false);
             }
